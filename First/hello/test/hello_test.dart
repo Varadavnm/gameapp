@@ -1,4 +1,4 @@
-import 'package:second/second.dart';
+import 'package:hello/hello.dart';
 import 'package:test/test.dart';
 
 void main() {
