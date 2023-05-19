@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game Platform</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <h1>Welcome to the Game Platform</h1>
+  <form action="/" method="post">
+    <label for="name">Enter your name:</label>
+    <input type="text" id="name" name="name" required>
+    <input type="submit" value="Start Game">
+  </form>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Level 2</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+  <script>
+    $(document).ready(function() {
+      // Your JavaScript code for Level 2 goes here
+    });
+  </script>
+</head>
+<body>
+  <h1>Level 2</h1>
+  <p>Welcome to Level 2 of the game!</p>
+  <p>Your score: {{ current_user.player.score }}</p>
+  
+  <!-- Example usage: Add a script tag at the bottom of the page -->
+ 
+  <a href="/level3">move to the next level</a>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    
+    <script>
+        function validateForm() {
+            var newPassword = document.getElementById("new_password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+
+            if (newPassword !== confirmPassword) {
+                document.getElementById("password_error").style.display = "block";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flash-messages">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+    <h2>Create New User</h2>
+    <form method="POST" action="/register" onsubmit="return validateForm()">
+        <label for="new_username">New Username:</label>
+        <input type="text" name="new_username" required><br><br>
+        <label for="new_password">New Password:</label>
+        <input type="password" name="new_password" id="new_password" required><br><br>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" name="confirm_password" id="confirm_password" required><br>
+        <p id="password_error" style="color: red; display: none;">Passwords do not match.</p><br>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>

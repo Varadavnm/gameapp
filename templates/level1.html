@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Level 1</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    table {
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      padding: 5px;
+    }
+
+    td input {
+      width: 30px;
+      height: 30px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Level 1: Sudoku</h1>
+  <p>Welcome to Level 1 of the game!</p>
+  <p>Your score: {{ current_user.player.score }}</p>
+
+  <table>
+    {% for row in sudoku_rows %}
+      <tr>
+        {% for value in row %}
+          <td><input type="number" min="1" max="9" value="{{ value }}"></td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </table>
+
+  <button onclick="checkSolution()">Check Solution</button>
+
+  <script>
+    function checkSolution() {
+      // Retrieve the entered values from the Sudoku grid
+      var values = [];
+      var inputs = document.getElementsByTagName('input');
+      for (var i = 0; i < inputs.length; i++) {
+        values.push(parseInt(inputs[i].value));
+      }
+
+      // Send the values to the server for validation
+      fetch('/validate_solution', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 'values': values }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.valid) {
+          alert('Congratulations! Solution is correct.');
+          window.location.href = '/level2';  // Move to the next level
+        } else {
+          alert('Incorrect solution. Please try again.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+  </script>
+</body>
+</html>
